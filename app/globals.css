@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+    --color-brand-50: #eef9ff;
+    --color-brand-100: #d9f1ff;
+    --color-brand-200: #b9e7ff;
+    --color-brand-300: #89d7ff;
+    --color-brand-400: #4fc0ff;
+    --color-brand-500: #1aa6ff;
+    --color-brand-600: #0786e6;
+    --color-brand-700: #056ab4;
+    --color-brand-800: #084f84;
+    --color-brand-900: #0b4069;
+
+    /* 自定义阴影：对标原来的 shadow-soft */
+    --shadow-soft: 0 10px 40px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* 你原来就有的全局样式保留即可 */
+:root {
+    color-scheme: light dark;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/* Smooth scroll + nicer scrollbars */
+* {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .2);
+    border-radius: 8px;
+}
+
+/* 背景网格（保留原样） */
+.bg-grid {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.06) 1px, transparent 0);
+    background-size: 22px 22px;
+}
