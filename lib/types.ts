@@ -16,3 +16,11 @@ export interface RagDoc {
     snippet: string
     score: number
 }
+
+export interface Session {
+    id: string
+    title: string
+    messages: Message[]
+    ragResults: RagDoc[]
+    createdAt: number
+}
