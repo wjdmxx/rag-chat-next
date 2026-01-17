@@ -15,6 +15,7 @@ export interface RagDoc {
     url?: string
     snippet: string
     score: number
+    status?: string
 }
 
 export interface Session {
