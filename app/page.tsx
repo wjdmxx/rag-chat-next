@@ -8,11 +8,22 @@ import type { Message, RagDoc, Session } from '@/lib/types'
 import { uid } from '@/lib/utils'
 import { useEffect, useState, useRef, useMemo } from 'react'
 
+const ALL_QUESTIONS = [
+    "拆卸诺基亚 2366i 主板需要哪些工具？",
+    "如何安全地更换 Nook HD 电池？",
+    "如何更换HP dv5-1125nr的键盘？",
+    "如何防止 Planet Eclipse Etha Bolt O 型圈未来出现问题？",
+    "如何更换 2009 年中款 MacBook Pro 15 Unibody 的液晶显示屏？",
+    "如何修复第一代 iPod Shuffle 的 USB 接口？",
+    "如何维修索尼 Vaio Tap 21 SVT212A11L 屏幕？",
+    "How to replace Toshiba Satellite A105-S4011 speakers?"
+]
 
 export default function Page() {
     const [sessions, setSessions] = useState<Session[]>([])
     const [activeId, setActiveId] = useState<string>('')
     const [typing, setTyping] = useState(false)
+    const [randomQuestions, setRandomQuestions] = useState<string[]>([])
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
     // Initialize first session
@@ -32,6 +43,10 @@ export default function Page() {
             setSessions([initialSession])
             setActiveId(newId)
         }
+
+        // Randomly select 3 questions
+        const shuffled = [...ALL_QUESTIONS].sort(() => 0.5 - Math.random())
+        setRandomQuestions(shuffled.slice(0, 3))
     }, [])
 
     const activeSession = useMemo(() =>
@@ -148,6 +163,19 @@ export default function Page() {
                         <div ref={messagesEndRef} />
                     </div>
                     <div className="mx-auto w-full max-w-3xl shrink-0">
+                        {messages.length <= 1 && randomQuestions.length > 0 && (
+                            <div className="mb-4 flex flex-wrap gap-2 px-4">
+                                {randomQuestions.map((q, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => onSend(q)}
+                                        className="rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs text-zinc-600 shadow-sm hover:bg-zinc-50 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 transition-colors"
+                                    >
+                                        {q}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                         <ChatComposer onSend={onSend} />
                     </div>
                 </section>
